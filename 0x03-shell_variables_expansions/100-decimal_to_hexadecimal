@@ -1,0 +1,2 @@
+#!/bin/bash
+echo '%x\n' $((10#$DECIMAL))
