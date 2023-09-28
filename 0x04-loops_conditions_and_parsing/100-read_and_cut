@@ -4,5 +4,5 @@
 file="/etc/passwd"
 while read -r pass
 do
-    echo "pass" | cut -d ":" -f1,3,6
+    echo "$pass" | cut -d ":" -f1,3,6
 done < "$file"
