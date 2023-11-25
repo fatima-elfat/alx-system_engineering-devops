@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#configure it to our needs so that you can connect
+Host *
+      PasswordAuthentication no
+      IdentifyFile ~/.ssh/school
