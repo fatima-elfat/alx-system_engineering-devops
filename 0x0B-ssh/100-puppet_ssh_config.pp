@@ -1,3 +1,4 @@
+#  configuration file task.
 file { 'etc/ssh/ssh_config':
   ensure => present,
   path   => '/etc/ssh/ssh_config',
