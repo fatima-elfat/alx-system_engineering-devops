@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-#hello world"
-sudo apt-get -y update
+#hello world
+
+sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.html
