@@ -1,17 +1,13 @@
 #  configuration file task
 exec { 'update':
-  command => '/usr/bin/apt-get update'
+  provider => shell,
+  command  => 'sudo apt-get -y update',
+  before   => Exec['install'],
 }
-
-exec {'install':
+exec { 'install':
   provider => shell,
   command  => 'sudo apt-get -y install nginx',
-  require => Exec['update']
-}
-exec { 'restart':
-  provider => shell,
-  command  => 'sudo service nginx restart',
-  require => Package['nginx']
+  before   => Exec['header'],
 }
 package { 'nginx':
   ensure => installed,
@@ -22,4 +18,8 @@ exec { 'header':
   environment => ["tmph=${hostname}"],
   command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$tmph\";/" /etc/nginx/nginx.conf',
   before      => Exec['restart'],
+}
+exec { 'restart':
+  provider => shell,
+  command  => 'sudo service nginx restart'
 }
