@@ -6,8 +6,8 @@ exec {'update':
 package { 'nginx':
   ensure => installed,
 }
--> file_line { 'http_header':
-  path  => '/etc/nginx/nginx.conf',
+-> file_line { 'header':
+  path  => '/etc/nginx/sites-enabled/default',
   match => 'http {',
   line  => "http {\n\tadd_header X-Served-By \"${hostname}\";",
 }
