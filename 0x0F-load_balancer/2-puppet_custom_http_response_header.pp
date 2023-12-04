@@ -1,6 +1,4 @@
-#  configuration file task.
-include 'stdlib'
-
+#  configuration file task
 exec { 'update':
   command => '/usr/bin/apt-get update'
 }
