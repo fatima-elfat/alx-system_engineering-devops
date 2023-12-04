@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#error 404
+str_red="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
+str_err="listen 80 default_server;\n\terror_page 404 \/error404.html;\n\tlocation = \/error404.html {\n\troot \/var\/www\/html;\n\tinternal;\n\t}"
+sudo apt-get -y update
+sudo apt-get -y install nginx
+echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sed -i "s/server_name _;/$str_red/" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
+sudo sed -i "s/listen 80 default_server;/$str_err/" /etc/nginx/sites-enabled/default
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+sudo service nginx restart
