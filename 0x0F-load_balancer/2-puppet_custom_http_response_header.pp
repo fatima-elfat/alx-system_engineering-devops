@@ -8,8 +8,8 @@ package { 'nginx':
 }
 -> file_line { 'header':
   path  => '/etc/nginx/sites-enabled/default',
-  match => 'http {',
-  line  => "http {\n\tadd_header X-Served-By \"${hostname}\";",
+  after  => '/server_name',
+  line  => "_/a add_header X-Served-By $HOSTNAME;",
 }
 -> exec {'run':
   command => '/usr/sbin/service nginx restart',
