@@ -36,23 +36,15 @@ defaults
 	option forwardfor
         option http-server-close
 
-frontend www-http
-        bind *:80
-        reqadd X-Forwarded-Proto:\ http
-        default_backend www-backend
-
 frontend www-https
+        # bind *:443 ssl crt /etc/letsencrypt/live/www.tutowithfz.tech/fullchain.pem
         bind *:443 ssl crt /etc/letsencrypt/live/www.tutowithfz.tech/haprivkey.pem
-        reqadd X-Forwarded-Proto:\ https
-        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-        use_backend letsencrypt-backend if letsencrypt-acl
-        default_backend www-backend
+        http-request redirect scheme https code 301 unless { ssl_fc }
+        mode http
+        default_backend http_back
 
-backend www-backend
+backend http_back
+        mode http
         balance roundrobin
-        redirect scheme https if !{ ssl_fc }
         server 407934-web-01 52.86.154.130:80 check
         server 407934-web-02 34.207.120.70:80 check
-
-backend letsencrypt-backend
-        server letsencrypt 127.0.0.1:54321
