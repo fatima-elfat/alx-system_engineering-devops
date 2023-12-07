@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# 0. World wide web
+
+domain_information () {
+    a=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')
+    b=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')
+	echo "The subdomain $2 is a $a record and points to $b"
+
+}
+if [ "$#" == 1 ]
+then
+   for subdomain  in "www" "lb-01" "web-01" "web-02"
+   do
+       infonction "$1" "$subdomain "
+   done
+elif [ "$#" == 2 ]
+    infonction "$1" "$2"
+fi
