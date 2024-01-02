@@ -16,7 +16,7 @@ if __name__ == "__main__":
         datas = {}
         for user in users:
             USERNAME = user.get("username")
-            USERID = str(user.get("id"))
+            USERID = user.get("id")
             todos = requests.get("{}/todos?userId={}".format(
                                                             URL,
                                                             USERID
@@ -27,5 +27,5 @@ if __name__ == "__main__":
                         "completed": task.get("completed")
                         }
                 tlist.append(data)
-            datas[user.get("id")] = tlist
+            datas[USERID] = tlist
         json.dump(datas, jsonfile)
