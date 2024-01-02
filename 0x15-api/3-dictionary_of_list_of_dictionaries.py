@@ -27,5 +27,5 @@ if __name__ == "__main__":
                         "completed": task.get("completed")
                         }
                 tlist.append(data)
-            datas[USERID] = tlist
+            datas[user.get("id")] = tlist
         json.dump(datas, jsonfile)
