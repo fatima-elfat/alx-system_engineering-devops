@@ -25,7 +25,7 @@ if __name__ == "__main__":
         todo = []
         user = list(user)
         for task in TASKS:
-            task =list(task)
+            task = list(task)
             if task[0] == user[0]:
                 todo.append({
                         "username": user[1],
