@@ -6,9 +6,9 @@ Format must be: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
 File name must be: USER_ID.csv
 """
 
-from sys import argv
-import requests
 import csv
+import requests
+from sys import argv
 
 
 if __name__ == "__main__":

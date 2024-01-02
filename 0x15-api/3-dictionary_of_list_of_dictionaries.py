@@ -3,9 +3,8 @@
 script to export data in the JSON format.
 """
 
-from sys import argv
-import requests
 import json
+import requests
 
 
 if __name__ == "__main__":
@@ -23,9 +22,9 @@ if __name__ == "__main__":
                                                             USERID
                                                             )).json()
             for task in todos:
-                data = {"task": task.get("title"),
-                        "completed": task.get("completed"),
-                        "username": USERNAME
+                data = {"username": USERNAME,
+                        "task": task.get("title"),
+                        "completed": task.get("completed")
                         }
                 tlist.append(data)
             datas[USERID] = tlist
