@@ -17,7 +17,13 @@ def number_of_subscribers(subreddit):
                             allow_redirects=False)
     if response.status_code != 200:
         return 0
+    """
     subscribers = response.json().get('data', {}).get('subscribers')
     if not subscribers:
         return 0
     return subscribers
+    """
+    sub = response.json()
+    if sub["kind"] != "t5":
+        return 0
+    return sub["data"]["subscribers"]
