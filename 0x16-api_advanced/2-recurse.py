@@ -23,6 +23,8 @@ def recurse(subreddit, hot_list=[], after=""):
     response = requests.get(URL,
                             headers={"User-Agent": "user_agent_00"},
                             allow_redirects=False)
+    if response.status_code != 200:
+        return None
     rs = response.json().get('data', {}).get('children', [])
     a = response.json().get('data', {}).get('after')
     for r in rs:

@@ -17,9 +17,13 @@ def top_ten(subreddit):
     response = requests.get(URL,
                             headers={"User-Agent": "user_agent_00"},
                             allow_redirects=False)
+    if response.status_code != 200:
+        print(None)
+        return
     ten_posts = response.json().get('data', {}).get('children', [])
     if not ten_posts:
         print(None)
+        return
     for post in ten_posts:
         title = post.get('data').get('title')
         print(title)
