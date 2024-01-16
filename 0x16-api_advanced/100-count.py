@@ -26,6 +26,9 @@ def count_words(subreddit, word_list, after="", saved={}):
         return
     rs = response.json().get('data', {}).get('children', [])
     a = response.json().get('data', {}).get('after')
+    if rs is None:
+        print("")
+        return
     for r in rs:
         t = r.get('data').get('title').lower()
         for w in word_list:
@@ -38,7 +41,7 @@ def count_words(subreddit, word_list, after="", saved={}):
                     saved[w] = c
                 else:
                     saved[w] = c + saved[w]
-    if not a:
+    if a is None:
         if len(saved) != 0:
             saved = sorted(saved.items(), key=lambda it: it[1], reverse=True)
             for key, val in saved:

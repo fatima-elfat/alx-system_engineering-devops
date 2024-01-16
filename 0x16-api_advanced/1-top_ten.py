@@ -21,7 +21,7 @@ def top_ten(subreddit):
         print(None)
         return
     ten_posts = response.json().get('data', {}).get('children', [])
-    if not ten_posts:
+    if ten_posts is None:
         print(None)
         return
     for post in ten_posts:
