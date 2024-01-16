@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-0. How many subs?
+function for the task 0.How many subs?
 """
 
 import requests
@@ -16,6 +16,8 @@ def number_of_subscribers(subreddit):
     response = requests.get(URL,
                             headers={"User-Agent": "user_agent_00"},
                             allow_redirects=False)
+    if response.status_code == 404:
+        return 0
     subscribers = response.json().get('data', {}).get('subscribers')
     if not subscribers:
         return 0
