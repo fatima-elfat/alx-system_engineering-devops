@@ -2,7 +2,6 @@
 """
 3. Count it!
 """
-
 import requests
 
 
@@ -35,16 +34,17 @@ def count_words(subreddit, word_list, after="", saved={}):
     for r in rs:
         t = r.get('data').get('title').lower()
         for w in word_list:
-            if w.lower() in t:
+            wl = w.lower()
+            if wl in t:
                 cl = []
                 for i in t.split():
-                    if i == w.lower():
+                    if i == wl:
                         cl.append(i)
                     c = len(cl)
-                if saved.get(w.lower()) is None:
-                    saved[w.lower()] = c
+                if saved.get(wl) is None:
+                    saved[wl] = c
                 else:
-                    saved[w.lower()] = c + saved[w.lower()]
+                    saved[wl] = c + saved[wl]
     if a is None:
         if len(saved) != 0:
             saved = sorted(saved.items(), key=lambda it: (-it[1], it[0]))
