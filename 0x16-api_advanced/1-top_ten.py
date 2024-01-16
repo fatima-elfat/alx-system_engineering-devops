@@ -13,13 +13,12 @@ def top_ten(subreddit):
     Args:
         subreddit (str): the name of the subreddit.
     """
-    URL = "https://www.reddit.com/r/{}//hot/.json?limit=10".format(subreddit)
+    URL = "https://www.reddit.com/r/{}//hot.json?limit=10".format(subreddit)
     response = requests.get(URL,
                             headers={"User-Agent": "user_agent_00"},
                             allow_redirects=False)
     if response.status_code != 200:
-        print(None)
-        return
+        return None
     ten_posts = response.json().get('data', {}).get('children', [])
     if ten_posts is None:
         print(None)
