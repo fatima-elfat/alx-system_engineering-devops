@@ -44,10 +44,10 @@ def count_words(subreddit, word_list, after="", saved={}):
                     saved[w.lower()] = c + saved[w.lower()]
     if a is None:
         if len(saved) != 0:
-            saved = sorted(saved.items(), key=lambda it: it[1], reverse=True)
+            saved = sorted(saved.items(), key=lambda it: (-it[1], it[0]))
             for key, val in saved:
                 if val != 0:
                     print("{}: {}".format(key, val))
         print("")
         return
-    return count_words(subreddit, word_list, after=a, saved=saved)
+    count_words(subreddit, word_list, after=a, saved=saved)
