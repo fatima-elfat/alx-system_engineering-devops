@@ -33,10 +33,11 @@ def count_words(subreddit, word_list, after="", saved={}):
         t = r.get('data').get('title').lower()
         for w in word_list:
             if w.lower() in t:
-                c = 0
+                cl = []
                 for i in t.split():
                     if i == w.lower():
-                        c = c + 1
+                        cl.append(i)
+                    c = len(cl)
                 if saved.get(w.lower()) is None:
                     saved[w.lower()] = c
                 else:
@@ -45,7 +46,8 @@ def count_words(subreddit, word_list, after="", saved={}):
         if len(saved) != 0:
             saved = sorted(saved.items(), key=lambda it: it[1], reverse=True)
             for key, val in saved:
-                print("{}: {}".format(key, val))
+                if val != 0:
+                    print("{}: {}".format(key, val))
         print("")
         return
     return count_words(subreddit, word_list, after=a, saved=saved)
