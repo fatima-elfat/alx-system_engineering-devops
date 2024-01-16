@@ -37,10 +37,10 @@ def count_words(subreddit, word_list, after="", saved={}):
                 for i in t.split():
                     if i == w.lower():
                         c = c + 1
-                if saved.get(w) is None:
-                    saved[w] = c
+                if saved.get(w.lower()) is None:
+                    saved[w.lower()] = c
                 else:
-                    saved[w] = c + saved[w]
+                    saved[w.lower()] = c + saved[w.lower()]
     if a is None:
         if len(saved) != 0:
             saved = sorted(saved.items(), key=lambda it: it[1], reverse=True)
