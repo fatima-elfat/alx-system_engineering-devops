@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-0. How many subs?
+function for the task 0.
 """
-
 import requests
 
 
@@ -14,9 +13,17 @@ def number_of_subscribers(subreddit):
     """
     URL = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     response = requests.get(URL,
-                            headers={"User-Agent": "user_agent_00"},
+                            headers={"User-Agent": "test"},
                             allow_redirects=False)
-    subscribers = response.json().get('data', {}).get('subscribers')
-    if not subscribers:
+    if response.status_code != 200:
+        return 0
+    """
+    sub = response.json()
+    if sub["kind"] != "t5":
+        return 0
+    return sub["data"]["subscribers"]
+    """
+    subscribers = response.json().get("data", {}).get("subscribers")
+    if subscribers is None:
         return 0
     return subscribers
