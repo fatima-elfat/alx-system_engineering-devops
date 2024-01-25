@@ -3,7 +3,7 @@ $myvar = '/etc/security/limits.conf'
 exec {'hard incr':
   provider => shell,
   command  => 'sudo sed -i "s/ile 5/ile 50000/" $myvar',
-  before   => Exec['soft inc'],
+  before   => Exec['soft incr'],
 }
 
 exec {'soft incr':
